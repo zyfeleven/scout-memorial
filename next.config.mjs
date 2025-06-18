@@ -2,8 +2,8 @@
 const nextConfig = {
   output: 'export',
   trailingSlash: true,
-  basePath: process.env.NODE_ENV === 'production' ? '/scout-memorial' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/scout-memorial/' : '',
+  basePath: '/scout-memorial',
+  assetPrefix: '/scout-memorial/',
   eslint: {
     ignoreDuringBuilds: true,
   },
