@@ -53,7 +53,56 @@
   * {
     @apply border-border;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
+    /* Ensure consistent background during loading */
+    background: linear-gradient(to bottom right, #fef7ed, #fed7aa, #fecaca) !important;
+    min-height: 100vh;
+  }
+
+  /* Prevent layout shift during loading */
+  body:not(.loaded) {
+    visibility: hidden;
+  }
+
+  body.loaded {
+    visibility: visible;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+/* Ensure images don't cause layout shift */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Loading skeleton styles */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
   }
 }

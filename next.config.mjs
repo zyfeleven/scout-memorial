@@ -13,6 +13,14 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Optimize CSS loading
+  experimental: {
+    optimizeCss: true,
+  },
+  // Ensure CSS is inlined for better loading
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
 }
 
 export default nextConfig

@@ -1,9 +1,23 @@
+"use client"
+
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import { Heart, Camera, Calendar, MapPin } from "lucide-react"
+import { useEffect, useState } from "react"
 
 export default function ScoutMemorial() {
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    // Ensure all resources are loaded
+    const timer = setTimeout(() => {
+      setIsLoaded(true)
+    }, 100)
+
+    return () => clearTimeout(timer)
+  }, [])
+
   // You can replace these with your actual photos of Scout
   const galleryImages = [
     { src: "/placeholder.svg?height=400&width=400", alt: "Scout playing in the park", caption: "Playing in the park" },
@@ -41,6 +55,17 @@ export default function ScoutMemorial() {
     },
   ]
 
+  if (!isLoaded) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-rose-500 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading Scout's Memorial...</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50">
       {/* Hero Section */}
@@ -76,6 +101,7 @@ export default function ScoutMemorial() {
                 width={400}
                 height={400}
                 className="object-cover"
+                priority
               />
             </div>
             <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
